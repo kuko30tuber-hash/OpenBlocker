@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB45C"/><stop offset=".48" stop-color="#F0573A"/><stop offset="1" stop-color="#7A0E2A"/>
+    </linearGradient>
+    <radialGradient id="hi" cx=".24" cy=".08" r=".7">
+      <stop offset="0" stop-color="#FFE2BF" stop-opacity=".55"/><stop offset="1" stop-color="#FFE2BF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity=".08"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".55" stop-color="#fff" stop-opacity=".36"/><stop offset="1" stop-color="#fff" stop-opacity=".26"/>
+    </linearGradient>
+    <linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity=".7"/>
+    </linearGradient>
+    <linearGradient id="check" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#FFF0E6"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF4D2"/><stop offset="1" stop-color="#F1C063"/>
+    </linearGradient>
+    <clipPath id="sq"><rect width="1024" height="1024" rx="232"/></clipPath>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="26" stdDeviation="30" flood-color="#2A0008" flood-opacity=".35"/></filter>
+    <filter id="sglow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="18" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <clipPath id="shieldClip"><path id="sp" d="M512 196 C590 244 676 270 768 276 C778 520 690 700 512 828 C334 700 246 520 256 276 C348 270 434 244 512 196Z"/></clipPath>
+  </defs>
+  <g clip-path="url(#sq)">
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <rect width="1024" height="1024" fill="url(#hi)"/>
+    <g transform="translate(512 512) scale(1.2) translate(-512 -512)"><!-- frosted glass shield -->
+    <g filter="url(#shadow)">
+      <path d="M512 196 C590 244 676 270 768 276 C778 520 690 700 512 828 C334 700 246 520 256 276 C348 270 434 244 512 196Z" fill="url(#glass)"/>
+    </g>
+    <g clip-path="url(#shieldClip)">
+      <ellipse cx="512" cy="300" rx="380" ry="170" fill="#fff" opacity=".10"/>
+    </g>
+    <path d="M512 196 C590 244 676 270 768 276 C778 520 690 700 512 828 C334 700 246 520 256 276 C348 270 434 244 512 196Z" fill="none" stroke="url(#glassEdge)" stroke-width="16"/>
+    <!-- check -->
+    <path d="M390 506 L478 594 L642 418" fill="none" stroke="url(#check)" stroke-width="78" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+  <rect x="3" y="3" width="1018" height="1018" rx="229" fill="none" stroke="url(#rim)" stroke-width="6"/>
+</svg>

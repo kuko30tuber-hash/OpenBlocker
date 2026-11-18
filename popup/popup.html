@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="state-on">
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <section class="glass hero" aria-live="polite">
+    <div class="logo" aria-hidden="true">
+      <img class="logo-on" src="../icons/logo256.png" alt="">
+      <img class="logo-off" src="../icons/logo256-off.png" alt="">
+      <span class="state-badge">
+        <svg viewBox="0 0 24 24"><path class="b-pause" d="M9.5 7v10M14.5 7v10"/><path class="b-off" d="M7.5 12h9"/></svg>
+      </span>
+    </div>
+    <h1 id="title">Protected</h1>
+    <p id="subtitle">on this site</p>
+    <button id="siteToggle" class="pill">Pause on this site</button>
+  </section>
+
+  <section class="glass stats">
+    <div class="stat">
+      <strong id="pageCount">0</strong>
+      <span id="pageLabel">blocked on this page</span>
+    </div>
+    <div class="stat total">
+      <strong id="totalCount">0</strong>
+      <span>blocked in total</span>
+    </div>
+  </section>
+
+  <section class="glass group">
+    <button id="picker" class="cell">
+      <span class="tile sunset" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M5 9V5h4M15 5h4v4M19 15v4h-4M9 19H5v-4"/><path d="m11 11 6 2.4-2.6.9-.9 2.6z"/></svg>
+      </span>
+      <span class="label"><b>Block an element</b><small>Remove anything with a click</small></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button>
+    <button id="settings" class="cell">
+      <span class="tile gray" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 8h9M17 8h3M4 16h3M11 16h9"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg>
+      </span>
+      <span class="label"><b>Settings</b><small>Filter lists, your filters, paused sites</small></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button>
+    <label class="cell toggle-cell">
+      <span class="tile ruby" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v8"/></svg>
+      </span>
+      <span class="label"><b>Block ads on all sites</b></span>
+      <input type="checkbox" id="enabled" role="switch">
+      <span class="switch" aria-hidden="true"></span>
+    </label>
+  </section>
+
+  <p id="lists" class="foot"></p>
+
+  <script src="popup.js"></script>
+</body>
+</html>

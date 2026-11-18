@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OpenBlocker settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+  <aside class="glass">
+    <div class="brand">
+      <img class="appicon" src="../icons/logo256.png" alt="">
+      <span>OpenBlocker</span>
+    </div>
+    <nav>
+      <a href="#protection" class="active">Protection</a>
+      <a href="#lists">Filter lists</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#filters">My filters</a>
+      <a href="#paused">Paused sites</a>
+    </nav>
+    <p class="total" id="total"></p>
+  </aside>
+
+  <main>
+    <section id="protection">
+      <h2>Protection</h2>
+      <p class="lede">How deep OpenBlocker can reach into pages.</p>
+      <div class="listbox glass">
+        <div class="row">
+          <div>
+            <b>Early page fixes</b> <span class="state" id="usState"></span>
+            <p id="usText">Checking…</p>
+          </div>
+          <div class="row-actions">
+            <button id="usOpen" hidden>Open extension details</button>
+            <button id="usCheck" hidden>Check again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lists">
+      <div class="head">
+        <div>
+          <h2>Filter lists</h2>
+          <p class="lede" id="listStatus">Lists that decide what gets blocked.</p>
+        </div>
+        <button id="update" class="secondary">Update now</button>
+      </div>
+      <div id="listGroups"></div>
+      <div class="savebar glass" id="listsBar" hidden>
+        <span>List changes take effect after the lists download again.</span>
+        <button id="saveLists" class="primary">Apply changes</button>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <h2>Privacy</h2>
+      <div class="listbox glass"><div class="row">
+        <div>
+          <b>Remove tracking codes from links</b>
+          <p>Strips utm_source, fbclid, gclid, msclkid and about 60 similar codes from web addresses before the page opens.</p>
+        </div>
+        <label class="switch"><input type="checkbox" id="trackingParams" role="switch" aria-label="Remove tracking codes from links"><span></span></label>
+      </div></div>
+    </section>
+
+    <section id="filters">
+      <h2>My filters</h2>
+      <p class="lede">Your own rules, one per line, in uBlock Origin or Adblock Plus syntax. Elements you remove with <b>Block an element</b> appear here, so you can undo them by deleting the line.</p>
+      <textarea class="glass" id="userFilters" spellcheck="false" rows="12" placeholder="example.com##.sidebar-ad
+||ads.example.com^
+example.com##.post:has-text(Sponsored)"></textarea>
+      <div class="actions"><button id="saveFilters" class="primary">Save filters</button><span id="filtersMsg" class="msg" role="status"></span></div>
+    </section>
+
+    <section id="paused">
+      <h2>Paused sites</h2>
+      <p class="lede">Ads are allowed on these sites. One site per line.</p>
+      <textarea class="glass" id="whitelist" spellcheck="false" rows="6" placeholder="example.com"></textarea>
+      <div class="actions"><button id="saveWhitelist" class="primary">Save paused sites</button><span id="wlMsg" class="msg" role="status"></span></div>
+    </section>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>

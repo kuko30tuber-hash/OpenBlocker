@@ -1,0 +1,45 @@
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --label: #1D1D1F; --secondary: rgba(60, 60, 67, .7); --canvas: #F2F2F7;
+  --red: #FF3B30; --red-ink: #D70015; --green-ink: #248A3D;
+  --glass-fill: linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.52));
+  --glass-edge: rgba(255,255,255,.75);
+  --glass-shadow: 0 20px 60px rgba(28,39,60,.14), 0 1px 3px rgba(28,39,60,.08);
+  --glass-inner: inset 0 1px 0 rgba(255,255,255,.95);
+  --blob-1: rgba(255, 59, 48, .32); --blob-2: rgba(255, 149, 0, .30); --blob-3: rgba(255, 45, 85, .22);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --label: #F5F5F7; --secondary: rgba(235,235,245,.68); --canvas: #000; --red-ink: #FF6961;
+    --glass-fill: linear-gradient(180deg, rgba(58,58,62,.62), rgba(36,36,40,.5)); --glass-edge: rgba(255,255,255,.14);
+    --glass-shadow: 0 20px 60px rgba(0,0,0,.55); --glass-inner: inset 0 1px 0 rgba(255,255,255,.16);
+    --blob-1: rgba(255, 69, 58, .30); --blob-2: rgba(255, 159, 10, .22); --blob-3: rgba(255, 55, 95, .2); }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; display: grid; place-items: center; padding: 24px; font: 15px/1.5 var(--font); color: var(--label); background: var(--canvas); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 3px solid rgba(0,122,255,.55); outline-offset: 2px; }
+.ambient { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.ambient i { position: absolute; border-radius: 50%; filter: blur(90px); }
+.ambient i:nth-child(1) { width: 620px; height: 520px; left: -120px; top: -160px; background: var(--blob-1); }
+.ambient i:nth-child(2) { width: 560px; height: 480px; right: -140px; top: 25%; background: var(--blob-2); }
+.ambient i:nth-child(3) { width: 600px; height: 420px; left: 30%; bottom: -200px; background: var(--blob-3); }
+.glass { position: relative; max-width: 520px; width: 100%; padding: 40px 36px 30px; border-radius: 32px; text-align: center;
+  background: var(--glass-fill); -webkit-backdrop-filter: blur(36px) saturate(180%); backdrop-filter: blur(36px) saturate(180%);
+  border: 1px solid var(--glass-edge); box-shadow: var(--glass-inner), var(--glass-shadow); }
+.glyph { width: 76px; height: 76px; margin: 0 auto 16px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.95), rgba(255,255,255,.35) 70%); box-shadow: 0 8px 22px rgba(255,59,48,.3); }
+@media (prefers-color-scheme: dark) { .glyph { background: radial-gradient(circle at 50% 30%, rgba(255,255,255,.22), rgba(255,255,255,.06) 70%); } }
+.glyph svg { width: 44px; height: 44px; }
+.shield { fill: var(--red); }
+.mark { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; }
+h1 { margin: 0; font: 700 28px/1.15 var(--display); letter-spacing: -.025em; }
+.host { margin: 6px 0 14px; font-weight: 600; color: var(--red-ink); word-break: break-all; }
+.why { margin: 0 auto 24px; color: var(--secondary); max-width: 42ch; }
+.actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+button { font: 600 15px/1 var(--font); cursor: pointer; border-radius: 999px; padding: 13px 24px; color: var(--label);
+  border: 1px solid var(--glass-edge); background: var(--glass-fill); box-shadow: var(--glass-inner), 0 2px 8px rgba(28,39,60,.08); }
+button:active { transform: scale(.97); }
+button.primary { color: #fff; border-color: transparent; background: linear-gradient(180deg, #3A3034, #1E1517); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 14px rgba(0,0,0,.25); }
+@media (prefers-color-scheme: dark) { button.primary { background: linear-gradient(180deg, #F7EEEC, #E4D8D5); color: #1E1517; } }
+.small { margin: 18px 0 0; font-size: 12.5px; color: var(--secondary); }

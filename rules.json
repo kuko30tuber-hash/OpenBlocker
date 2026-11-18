@@ -1,0 +1,1142 @@
+[
+ {
+  "id": 1,
+  "priority": 3,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "requestDomains": [
+    "2o7.net",
+    "33across.com",
+    "360yield.com",
+    "3lift.com",
+    "a-ads.com",
+    "ad-maven.com",
+    "ad.gt",
+    "adblade.com",
+    "adcash.com",
+    "adcash.network",
+    "adcolony.com",
+    "addthis.com",
+    "addthisedge.com",
+    "adform.com",
+    "adform.net",
+    "adfox.yandex.ru",
+    "adfstat.yandex.com",
+    "adfstat.yandex.ru",
+    "adgrx.com",
+    "adhigh.net",
+    "adition.com",
+    "adjust.com",
+    "adjust.io",
+    "adkernel.com",
+    "adlightning.com",
+    "admaven.com",
+    "adnxs-simple.com",
+    "adnxs.com",
+    "adroll.com",
+    "ads-api.tiktok.com",
+    "ads-api.twitter.com",
+    "ads-sg.tiktok.com",
+    "ads-twitter.com",
+    "ads.linkedin.com",
+    "ads.mopub.com",
+    "ads.pinterest.com",
+    "ads.tiktok.com",
+    "ads.yahoo.com",
+    "ads.youtube.com",
+    "adsafeprotected.com",
+    "adsco.re",
+    "adsdk.yandex.net",
+    "adsdk.yandex.ru",
+    "adserver.unityads.unity3d.com",
+    "adservetx.media.net",
+    "adsfs.oppomobile.com",
+    "adskeeper.co.uk",
+    "adskeeper.com",
+    "adsmoloco.com",
+    "adspirit.de",
+    "adsrvr.org",
+    "adsterra.com",
+    "adsymptotic.com",
+    "adtago.s3.amazonaws.com",
+    "adtech.de",
+    "adtech.yahooinc.com",
+    "adtelligent.com",
+    "adtima.vn",
+    "adtimaserver.vn",
+    "advertising-api-eu.amazon.com",
+    "advertising.com",
+    "advertising.yahoo.com",
+    "advice-ads.s3.amazonaws.com",
+    "adx.ads.oppomobile.com",
+    "adyoulike.com",
+    "adzerk.com",
+    "adzerk.net",
+    "affiliationjs.s3.amazonaws.com",
+    "agkn.com",
+    "alb.reddit.com",
+    "amplitude.com",
+    "an.yandex.ru",
+    "analytics-api.samsunghealthcn.com",
+    "analytics-sg.tiktok.com",
+    "analytics.oneplus.cn",
+    "analytics.pinterest.com",
+    "analytics.pointdrive.linkedin.com",
+    "analytics.query.yahoo.com",
+    "analytics.s3.amazonaws.com",
+    "analytics.tiktok.com",
+    "analytics.twitter.com",
+    "analytics.yahoo.com",
+    "analyticsengine.s3.amazonaws.com",
+    "aniview.com",
+    "api-adservices.apple.com",
+    "api.ad.xiaomi.com",
+    "app.getsentry.com",
+    "app.link",
+    "applovin.com",
+    "applvn.com",
+    "appmetrica.yandex.com",
+    "appmetrica.yandex.ru",
+    "appsflyer.com",
+    "auction.unityads.unity3d.com",
+    "bam.nr-data.net",
+    "bdapi-ads.realmemobile.com",
+    "bdapi-in-ads.realmemobile.com",
+    "bidswitch.net",
+    "bitmedia.io",
+    "bluekai.com",
+    "books-analytics-events.apple.com",
+    "bounceexchange.com",
+    "bouncex.net",
+    "branch.io",
+    "browser.sentry-cdn.com",
+    "bugsnag.com",
+    "bugsnag.io",
+    "business-api.tiktok.com",
+    "buysellads.com",
+    "buysellads.net",
+    "carbonads.com",
+    "carbonads.net",
+    "casalemedia.com",
+    "cdn.optimizely.com",
+    "cdn.permutive.com",
+    "cdn.segment.com",
+    "chartbeat.com",
+    "chartbeat.net",
+    "chartboost.com",
+    "ck.ads.oppomobile.com",
+    "clarity.ms",
+    "claritybt.freshmarketer.com",
+    "click.oneplus.cn",
+    "clickadu.com",
+    "clickaine.com",
+    "clicky.com",
+    "coinzilla.com",
+    "confiant-integrations.net",
+    "config.unityads.unity3d.com",
+    "connatix.com",
+    "content.ad",
+    "contentabc.com",
+    "contextweb.com",
+    "crazyegg.com",
+    "criteo.com",
+    "criteo.net",
+    "crwdcntrl.net",
+    "ct.pinterest.com",
+    "d2wy8f7a9ursnm.cloudfront.net",
+    "data.ads.oppomobile.com",
+    "data.mistat.india.xiaomi.com",
+    "data.mistat.intl.xiaomi.com",
+    "data.mistat.rus.xiaomi.com",
+    "data.mistat.xiaomi.com",
+    "demdex.net",
+    "device-metrics-us-2.amazon.com",
+    "device-metrics-us.amazon.com",
+    "districtm.io",
+    "dotomi.com",
+    "doubleverify.com",
+    "e-planning.net",
+    "emxdgt.com",
+    "events.reddit.com",
+    "events.redditmedia.com",
+    "everesttech.net",
+    "exelator.com",
+    "exoclick.com",
+    "exosrv.com",
+    "extmaps-api.yandex.net",
+    "eyeota.net",
+    "flashtalking.com",
+    "fls-na.amazon.com",
+    "freshmarketer.com",
+    "fullstory.com",
+    "fwtracks.freshmarketer.com",
+    "fyber.com",
+    "galaksion.com",
+    "gemini.yahoo.com",
+    "geo.yahoo.com",
+    "getclicky.com",
+    "getsentry.com",
+    "grs.hicloud.com",
+    "gumgum.com",
+    "heapanalytics.com",
+    "hilltopads.net",
+    "histats.com",
+    "hotjar.com",
+    "hotjar.io",
+    "iadsdk.apple.com",
+    "improvedigital.com",
+    "imrworldwide.com",
+    "indexww.com",
+    "infolinks.com",
+    "ingest.sentry.io",
+    "inmobi.com",
+    "inspectlet.com",
+    "intellitxt.com",
+    "iot-eu-logser.realme.com",
+    "iot-logser.realme.com",
+    "ironsrc.mobi",
+    "izooto.com",
+    "js.sentry-cdn.com",
+    "juicyads.com",
+    "justpremium.com",
+    "kissmetrics.com",
+    "kissmetrics.io",
+    "kochava.com",
+    "kontera.com",
+    "krxd.net",
+    "liadm.com",
+    "ligatus.com",
+    "lijit.com",
+    "log.byteoversea.com",
+    "log.fc.yahoo.com",
+    "log.pinterest.com",
+    "logbak.hicloud.com",
+    "logrocket.com",
+    "logrocket.io",
+    "logservice.hicloud.com",
+    "logservice1.hicloud.com",
+    "lr-ingest.io",
+    "luckyorange.com",
+    "luckyorange.net",
+    "mads-eu.amazon.com",
+    "mathtag.com",
+    "mc.yandex.com",
+    "mc.yandex.ru",
+    "media.net",
+    "metrics.data.hicloud.com",
+    "metrics.icloud.com",
+    "metrics.mzstatic.com",
+    "metrics2.data.hicloud.com",
+    "metrika.yandex.ru",
+    "mgid.com",
+    "mixpanel.com",
+    "ml314.com",
+    "moatads.com",
+    "moatpixel.com",
+    "mobile.yandexadexchange.net",
+    "monetag.com",
+    "mookie1.com",
+    "mopub.com",
+    "mouseflow.com",
+    "mxpnl.com",
+    "nativeads.com",
+    "nativo.com",
+    "newrelic.com",
+    "nmetrics.samsung.com",
+    "notes-analytics-events.apple.com",
+    "notify.bugsnag.com",
+    "nr-data.net",
+    "offerwall.yandex.net",
+    "ogury.com",
+    "ogury.io",
+    "omtrdc.net",
+    "onclickads.net",
+    "onclkds.com",
+    "onesignal.com",
+    "onetag-sys.com",
+    "open.oneplus.net",
+    "openx.com",
+    "openx.net",
+    "optimizely.com",
+    "outbrain.com",
+    "outbrainimg.com",
+    "pangle.io",
+    "pangleglobal.com",
+    "partnerads.ysm.yahoo.com",
+    "permutive.com",
+    "pixel.wp.com",
+    "plista.com",
+    "popads.net",
+    "popcash.net",
+    "popmyads.com",
+    "primis.tech",
+    "propellerads.com",
+    "propellerclick.com",
+    "pubmatic.com",
+    "pushcrew.com",
+    "pushengage.com",
+    "px.ads.linkedin.com",
+    "quantcount.com",
+    "quantserve.com",
+    "raygun.io",
+    "realsrv.com",
+    "revcontent.com",
+    "rfihub.com",
+    "rfihub.net",
+    "richaudience.com",
+    "richpush.co",
+    "rlcdn.com",
+    "rollbar.com",
+    "rubiconproject.com",
+    "samsung-com.112.2o7.net",
+    "samsungads.com",
+    "scorecardresearch.com",
+    "sdkconfig.ad.intl.xiaomi.com",
+    "sdkconfig.ad.xiaomi.com",
+    "seedtag.com",
+    "segment.com",
+    "segment.io",
+    "sentry-cdn.com",
+    "sentry.io",
+    "serving-sys.com",
+    "sessioncam.com",
+    "sessions.bugsnag.com",
+    "sharethis.com",
+    "sharethrough.com",
+    "simpli.fi",
+    "sitescout.com",
+    "skimlinks.com",
+    "skimresources.com",
+    "smaato.net",
+    "smartadserver.com",
+    "smartlook.com",
+    "smetrics.samsung.com",
+    "smilewanted.com",
+    "sovrn.com",
+    "spotx.tv",
+    "spotxchange.com",
+    "springserve.com",
+    "startapp.com",
+    "startappservice.com",
+    "statcounter.com",
+    "static.ads-twitter.com",
+    "static.media.net",
+    "stats.wp.com",
+    "stickyadstv.com",
+    "subscribers.com",
+    "supersonicads.com",
+    "taboola.com",
+    "taboolasyndication.com",
+    "tapad.com",
+    "tapjoy.com",
+    "tapjoyads.com",
+    "teads.tv",
+    "tracking.intl.miui.com",
+    "tracking.rus.miui.com",
+    "trackjs.com",
+    "trafficjunky.com",
+    "trafficjunky.net",
+    "trafficstars.com",
+    "triplelift.com",
+    "trk.pinterest.com",
+    "tsyndicate.com",
+    "turn.com",
+    "udc.yahoo.com",
+    "udcm.yahoo.com",
+    "undertone.com",
+    "unityads.unity3d.com",
+    "vibrantmedia.com",
+    "vidazoo.com",
+    "viglink.com",
+    "vungle.com",
+    "w55c.net",
+    "weather-analytics-events.apple.com",
+    "webview.unityads.unity3d.com",
+    "widgets.pinterest.com",
+    "woopra.com",
+    "yandexadexchange.net",
+    "yieldlab.net",
+    "yieldlove.com",
+    "yieldmo.com",
+    "yieldoptimizer.com",
+    "zedo.com",
+    "zemanta.com",
+    "zergnet.com",
+    "zeropark.com"
+   ]
+  }
+ },
+ {
+  "id": 2,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "requestDomains": [
+    "aax.amazon-adsystem.com",
+    "adservice.google.co.uk",
+    "adservice.google.com",
+    "adservice.google.cz",
+    "adservice.google.de",
+    "adservice.google.sk",
+    "afs.googlesyndication.com",
+    "amazon-adsystem.com",
+    "an.facebook.com",
+    "analytics.google.com",
+    "app-measurement.com",
+    "click.googleanalytics.com",
+    "doubleclick.net",
+    "google-analytics.com",
+    "googleadservices.com",
+    "googlesyndication.com",
+    "googletagmanager.com",
+    "googletagservices.com",
+    "imasdk.googleapis.com",
+    "pagead2.googleadservices.com",
+    "partnerad.l.doubleclick.net",
+    "pixel.facebook.com"
+   ]
+  }
+ },
+ {
+  "id": 3,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||connect.facebook.net^*/fbevents.js"
+  }
+ },
+ {
+  "id": 4,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||facebook.com/tr/"
+  }
+ },
+ {
+  "id": 5,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||facebook.com/tr?"
+  }
+ },
+ {
+  "id": 6,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||bing.com/bat.js"
+  }
+ },
+ {
+  "id": 7,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "||bat.bing.com^"
+  }
+ },
+ {
+  "id": 8,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adsbygoogle.js"
+  }
+ },
+ {
+  "id": 9,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/pagead/js/"
+  }
+ },
+ {
+  "id": 10,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/gpt.js"
+  }
+ },
+ {
+  "id": 11,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/pubads_impl"
+  }
+ },
+ {
+  "id": 12,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/prebid.js"
+  }
+ },
+ {
+  "id": 13,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/prebid-"
+  }
+ },
+ {
+  "id": 14,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/prebid.min.js"
+  }
+ },
+ {
+  "id": 15,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads/ad-"
+  }
+ },
+ {
+  "id": 16,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adserver/"
+  }
+ },
+ {
+  "id": 17,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adframe."
+  }
+ },
+ {
+  "id": 18,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ad_banner"
+  }
+ },
+ {
+  "id": 19,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ad-banner."
+  }
+ },
+ {
+  "id": 20,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adbanner."
+  }
+ },
+ {
+  "id": 21,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/banner_ad."
+  }
+ },
+ {
+  "id": 22,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads/banner"
+  }
+ },
+ {
+  "id": 23,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/advertisement.js"
+  }
+ },
+ {
+  "id": 24,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/advert.js"
+  }
+ },
+ {
+  "id": 25,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adsense."
+  }
+ },
+ {
+  "id": 26,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ad-loader."
+  }
+ },
+ {
+  "id": 27,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adloader."
+  }
+ },
+ {
+  "id": 28,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ad_iframe."
+  }
+ },
+ {
+  "id": 29,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adtag."
+  }
+ },
+ {
+  "id": 30,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/adtags."
+  }
+ },
+ {
+  "id": 31,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads.js?"
+  }
+ },
+ {
+  "id": 32,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/show_ads.js"
+  }
+ },
+ {
+  "id": 33,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/doubleclick.js"
+  }
+ },
+ {
+  "id": 34,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/gtag/js?id="
+  }
+ },
+ {
+  "id": 35,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/analytics.js"
+  }
+ },
+ {
+  "id": 36,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ga.js"
+  }
+ },
+ {
+  "id": 37,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/fbevents.js"
+  }
+ },
+ {
+  "id": 38,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/hotjar-"
+  }
+ },
+ {
+  "id": 39,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/matomo.js"
+  }
+ },
+ {
+  "id": 40,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/piwik.js"
+  }
+ },
+ {
+  "id": 41,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/clarity.js"
+  }
+ },
+ {
+  "id": 42,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/bugsnag.min.js"
+  }
+ },
+ {
+  "id": 43,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/bugsnag.js"
+  }
+ },
+ {
+  "id": 44,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/bugsnag-"
+  }
+ },
+ {
+  "id": 45,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/sentry.min.js"
+  }
+ },
+ {
+  "id": 46,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/raven.min.js"
+  }
+ },
+ {
+  "id": 47,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/raven.js"
+  }
+ },
+ {
+  "id": 48,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/bundle.tracing.replay.min.js"
+  }
+ },
+ {
+  "id": 49,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/rollbar.min.js"
+  }
+ },
+ {
+  "id": 50,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/logrocket.min.js"
+  }
+ },
+ {
+  "id": 51,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "_ads_banner."
+  }
+ },
+ {
+  "id": 52,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "-ads-banner."
+  }
+ },
+ {
+  "id": 53,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads_banner."
+  }
+ },
+ {
+  "id": 54,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads-banner."
+  }
+ },
+ {
+  "id": 55,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "_advertising_ads_"
+  }
+ },
+ {
+  "id": 56,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/advertising_banner"
+  }
+ },
+ {
+  "id": 57,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/banners/ads_"
+  }
+ },
+ {
+  "id": 58,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/banners/ad_"
+  }
+ },
+ {
+  "id": 59,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads/ads.js"
+  }
+ },
+ {
+  "id": 60,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/pagead.js"
+  }
+ },
+ {
+  "id": 61,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/widget/ads."
+  }
+ },
+ {
+  "id": 62,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/js/ads.js"
+  }
+ },
+ {
+  "id": 63,
+  "priority": 1,
+  "action": {
+   "type": "block"
+  },
+  "condition": {
+   "urlFilter": "/ads/banner."
+  }
+ },
+ {
+  "id": 64,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/gpt.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||securepubads.g.doubleclick.net/tag/js/gpt.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 65,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/gpt.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||googletagservices.com/tag/js/gpt.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 66,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/adsbygoogle.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 67,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/analytics.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||google-analytics.com/analytics.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 68,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/ga.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||google-analytics.com/ga.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 69,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/gtm.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||googletagmanager.com/gtm.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 70,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/apstag.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||c.amazon-adsystem.com/aax2/apstag.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ },
+ {
+  "id": 71,
+  "priority": 4,
+  "action": {
+   "type": "redirect",
+   "redirect": {
+    "extensionPath": "/resources/scorecard.js"
+   }
+  },
+  "condition": {
+   "urlFilter": "||sb.scorecardresearch.com/beacon.js",
+   "resourceTypes": [
+    "script"
+   ]
+  }
+ }
+]

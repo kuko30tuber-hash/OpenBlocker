@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Site blocked – OpenBlocker</title>
+  <link rel="stylesheet" href="blocked.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+  <main class="glass">
+    <div class="glyph" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path class="shield" d="M12 2.2c2.6 1.5 5.4 2.3 8.3 2.4.3 6.9-2.4 12.6-8.3 16.9C6.1 17.2 3.4 11.5 3.7 4.6c2.9-.1 5.7-.9 8.3-2.4Z"/><path class="mark" d="M12 7.5v5.5M12 16.2v.3"/></svg>
+    </div>
+    <h1>This site was blocked</h1>
+    <p class="host" id="host"></p>
+    <p class="why">A filter list you use marks this site as a source of scams, malware, fake downloads or aggressive ads. OpenBlocker stopped it from opening.</p>
+    <div class="actions">
+      <button id="back" class="primary">Go back</button>
+      <button id="proceed">Open anyway</button>
+    </div>
+    <p class="small" id="note">"Open anyway" allows this site until you close Chrome.</p>
+  </main>
+  <script src="blocked.js"></script>
+</body>
+</html>
