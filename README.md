@@ -34,9 +34,10 @@
 - **Pop-up and pop-under blocker.**
 
 **YouTube**
-- Ads are skipped automatically, and unskippable ones play muted at 16× until they're over.
+- The Skip button is clicked the moment YouTube shows it.
+- Unskippable ads are muted and covered by an OpenBlocker card counting down to your video.
 - Ad slots in the feed and sidebar are hidden.
-- OpenBlocker never edits YouTube's video data, so the player doesn't go black.
+- OpenBlocker never speeds up, skips ahead in or edits YouTube ads, because YouTube answers all of those with a black player.
 
 **Interface**
 - Popup with per-page and total counters, and a one-click pause per site.

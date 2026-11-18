@@ -29,7 +29,24 @@ html.sas-on ytm-companion-ad-renderer {
   display: none !important;
 }
 
-/* While an ad plays (muted, 16x), hide its picture so it doesn't flash on screen */
-html.sas-on .html5-video-player.ad-showing video {
-  opacity: 0 !important;
+
+/* OpenBlocker card shown over a muted, hidden unskippable ad */
+.html5-video-player .ob-ad-cover {
+  position: absolute; inset: 0; z-index: 40; display: grid; place-items: center; pointer-events: none;
+  background: radial-gradient(120% 90% at 30% 20%, rgba(240, 87, 58, .28), transparent 60%), #0d0709;
 }
+.html5-video-player .ob-ad-cover .ob-card {
+  display: flex; align-items: center; gap: 14px; padding: 14px 20px 14px 14px; border-radius: 22px;
+  color: #f7eeec; font: 500 14px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text", "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(180deg, rgba(70, 50, 52, .62), rgba(36, 24, 26, .55));
+  border: 1px solid rgba(255, 235, 230, .14);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 236, .16), 0 12px 36px rgba(0, 0, 0, .45);
+  -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%);
+}
+.html5-video-player .ob-ad-cover img { width: 40px; height: 40px; flex: none; }
+.html5-video-player .ob-ad-cover b { display: block; font-weight: 650; font-size: 15px; }
+.html5-video-player .ob-ad-cover .ob-time { display: block; color: rgba(247, 230, 228, .7); font-size: 13px; font-variant-numeric: tabular-nums; }
+/* keep YouTube's own Skip button above the card */
+.html5-video-player.ad-showing .ytp-skip-ad-button,
+.html5-video-player.ad-showing .ytp-ad-skip-button-container,
+.html5-video-player.ad-showing .ytp-ad-skip-button-slot { z-index: 41 !important; position: relative; }

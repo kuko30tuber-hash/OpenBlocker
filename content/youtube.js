@@ -1,28 +1,30 @@
 // OpenBlocker - YouTube ad handling (isolated world)
 //
-// YouTube punishes players whose ad data has been tampered with (the video stays black), and it
-// sometimes stitches ads into the main video stream. So OpenBlocker never edits YouTube's ad data
-// and never seeks. Instead it:
-//   * clicks "Skip" as soon as it appears,
-//   * plays unskippable ads muted at 16x, so they are over in about a second,
-//   * hides the ad picture while it plays (youtube.css),
-//   * restores the viewer's own volume, mute and speed afterwards.
+// What YouTube does today:
+//   * It punishes players whose ad data was tampered with (the video stays black).
+//   * It makes viewers wait out an unskippable ad in real time: if the ad is sped up or skipped
+//     ahead, the player just sits on a black screen until the ad would have ended.
+//
+// So OpenBlocker never edits YouTube's data, never seeks and never speeds ads up. Instead it:
+//   * clicks "Skip" the moment YouTube offers it (a normal skip, which really saves time),
+//   * mutes unskippable ads and covers them with an OpenBlocker card counting down to the video,
+//   * restores the viewer's own volume and mute state as soon as the video starts.
 //
 // Robustness:
-//   * The ad is handled BEFORE any extension API call, and every extension API call is guarded,
-//     so the skipper keeps working even if the extension was updated while this tab stayed open
-//     (Chrome cuts such "orphaned" scripts off from the extension).
-//   * When OpenBlocker updates, the background re-injects this script into open YouTube tabs;
-//     the newest copy takes over and older copies stop.
+//   * The ad is handled before any extension API call, and all extension API calls are guarded,
+//     so this keeps working in tabs that stayed open while OpenBlocker updated.
+//   * After an update the background re-injects this script into open YouTube tabs; the newest
+//     copy takes over and older copies stop.
 //   * Every video player on the page is checked, not just the first one found.
 (() => {
   const ME = Math.random().toString(36).slice(2);
   const root = document.documentElement;
-  root.dataset.obYt = ME; // the newest copy of this script wins
+  root.dataset.obYt = ME;
   const isCurrent = () => root.dataset.obYt === ME;
 
   let enabled = true;
   const safe = (fn) => { try { return fn(); } catch (_) { return undefined; } };
+  const logoUrl = safe(() => chrome.runtime.getURL("icons/logo256.png")) || "";
 
   function refresh() {
     safe(() => chrome.storage.local.get({ enabled: true, whitelist: [] }, (s) => {
@@ -46,45 +48,72 @@
     ".ytp-ad-overlay-close-button",
   ];
 
-  // video element -> the viewer's settings saved when its ad started
+  // video element -> { muted } saved when its ad started
   const saved = new Map();
+  // player element -> cover card
+  const covers = new Map();
 
-  function startAd(video) {
+  function cover(player) {
+    let c = covers.get(player);
+    if (c && c.isConnected) return c;
+    c = document.createElement("div");
+    c.className = "ob-ad-cover";
+    c.setAttribute("aria-live", "polite");
+    c.innerHTML = `<div class="ob-card">${logoUrl ? `<img alt="" src="${logoUrl}">` : ""}<div><b>Ad muted and hidden</b><span class="ob-time"></span></div></div>`;
+    player.appendChild(c);
+    covers.set(player, c);
+    return c;
+  }
+  function uncover(player) {
+    const c = covers.get(player);
+    if (c) c.remove();
+    covers.delete(player);
+  }
+
+  function startAd(player, video) {
     if (!saved.has(video)) {
-      saved.set(video, { muted: video.muted, rate: video.playbackRate === 16 ? 1 : video.playbackRate });
+      saved.set(video, { muted: video.muted });
       safe(() => chrome.runtime.sendMessage({ type: "adSkipped", count: 1 }).catch(() => {}));
     }
     if (!video.muted) video.muted = true;
-    if (video.playbackRate !== 16) safe(() => { video.playbackRate = 16; });
+    if (video.style.opacity !== "0") video.style.setProperty("opacity", "0", "important");
+    const c = cover(player);
+    const left = isFinite(video.duration) && video.duration > 0 ? Math.max(0, Math.ceil(video.duration - video.currentTime)) : null;
+    const t = c.querySelector(".ob-time");
+    const text = left === null ? "Your video starts shortly" : `Your video starts in ${left} s`;
+    if (t && t.textContent !== text) t.textContent = text;
   }
 
-  function endAd(video) {
-    const s = saved.get(video);
-    if (!s) return;
-    saved.delete(video);
-    safe(() => { video.playbackRate = s.rate || 1; video.muted = s.muted; });
+  function endAd(player, video) {
+    if (video) {
+      const s = saved.get(video);
+      saved.delete(video);
+      safe(() => { video.style.removeProperty("opacity"); if (s) video.muted = s.muted; });
+    }
+    if (player) uncover(player);
   }
-  function endAll() { [...saved.keys()].forEach(endAd); }
+  function endAll() {
+    document.querySelectorAll("#movie_player, .html5-video-player").forEach((p) => endAd(p, p.querySelector("video")));
+    saved.clear();
+  }
 
   function handle() {
     if (!isCurrent()) { stop(); return; }
     if (!enabled) return;
-    const players = document.querySelectorAll("#movie_player, .html5-video-player");
-    let anyAd = false;
-    for (const player of players) {
+    for (const player of document.querySelectorAll("#movie_player, .html5-video-player")) {
       const video = player.querySelector("video");
       const inAd = player.classList.contains("ad-showing") || player.classList.contains("ad-interrupting");
       if (inAd) {
-        anyAd = true;
-        if (video) startAd(video);
         for (const sel of SKIP_SELECTORS) {
           player.querySelectorAll(sel).forEach((btn) => { if (btn.offsetParent !== null) btn.click(); });
         }
-      } else if (video && saved.has(video)) {
-        endAd(video);
+        if (video) startAd(player, video);
+      } else if ((video && (saved.has(video) || video.style.opacity === "0")) || covers.has(player)) {
+        endAd(player, video);
       }
+      // Repair players left with a sped-up rate by older OpenBlocker versions
+      if (!inAd && video && video.playbackRate === 16) safe(() => { video.playbackRate = 1; });
     }
-    if (!anyAd) for (const v of [...saved.keys()]) if (!v.isConnected) saved.delete(v);
 
     // Close the "ad blockers are not allowed" dialog if it appears, and resume playback
     const wall = document.querySelector("ytd-enforcement-message-view-model");
@@ -98,14 +127,11 @@
   }
 
   let mo = null, timer = null;
-  function stop() {
-    if (mo) mo.disconnect();
-    clearInterval(timer);
-  }
+  function stop() { if (mo) mo.disconnect(); clearInterval(timer); }
   function start() {
     mo = new MutationObserver(handle);
     mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
-    timer = setInterval(handle, 200);
+    timer = setInterval(handle, 250);
     handle();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);

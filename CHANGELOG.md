@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.6.0 (2026-11-18)
+
+### Fixed
+- **Black screen on YouTube.** YouTube now makes viewers wait out an unskippable ad in real time; sped-up ads were replaced by a black screen for the rest of the ad's length. OpenBlocker no longer speeds ads up.
+
+### Changed
+- Unskippable YouTube ads are muted and covered by an OpenBlocker card with a countdown to the video. Skip is still clicked the moment YouTube offers it.
+- Players left at 16× speed by older versions are reset automatically.
+
 ## v5.5.0 (2026-11-18)
 
 ### Fixed
