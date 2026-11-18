@@ -59,7 +59,16 @@
     c = document.createElement("div");
     c.className = "ob-ad-cover";
     c.setAttribute("aria-live", "polite");
-    c.innerHTML = `<div class="ob-card">${logoUrl ? `<img alt="" src="${logoUrl}">` : ""}<div><b>Ad muted and hidden</b><span class="ob-time"></span></div></div>`;
+    // Built with DOM APIs: YouTube enforces Trusted Types, so innerHTML would throw here
+    const card = document.createElement("div");
+    card.className = "ob-card";
+    if (logoUrl) { const img = document.createElement("img"); img.alt = ""; img.src = logoUrl; card.appendChild(img); }
+    const text = document.createElement("div");
+    const title = document.createElement("b"); title.textContent = "Ad muted and hidden";
+    const time = document.createElement("span"); time.className = "ob-time";
+    text.append(title, time);
+    card.appendChild(text);
+    c.appendChild(card);
     player.appendChild(c);
     covers.set(player, c);
     return c;
@@ -76,8 +85,9 @@
       safe(() => chrome.runtime.sendMessage({ type: "adSkipped", count: 1 }).catch(() => {}));
     }
     if (!video.muted) video.muted = true;
+    const c = safe(() => cover(player));
+    if (!c) return; // no card -> leave the (muted) ad visible rather than show a black screen
     if (video.style.opacity !== "0") video.style.setProperty("opacity", "0", "important");
-    const c = cover(player);
     const left = isFinite(video.duration) && video.duration > 0 ? Math.max(0, Math.ceil(video.duration - video.currentTime)) : null;
     const t = c.querySelector(".ob-time");
     const text = left === null ? "Your video starts shortly" : `Your video starts in ${left} s`;

@@ -6,8 +6,9 @@
 
   const host = document.createElement("sas-picker");
   const shadow = host.attachShadow({ mode: "closed" });
-  shadow.innerHTML = `
-    <style>
+  // Built with DOM APIs: some sites (YouTube) enforce Trusted Types, so innerHTML would throw
+  const el = (tag, props, ...kids) => { const e = document.createElement(tag); Object.assign(e, props || {}); e.append(...kids); return e; };
+  const style = el("style"); style.textContent = `
       .box { position: fixed; pointer-events: none; z-index: 2147483646; border-radius: 6px;
              background: rgba(240,87,58,.16); outline: 2px solid rgba(240,87,58,.95); transition: all .08s ease; }
       .panel { position: fixed; right: 18px; bottom: 18px; z-index: 2147483647; width: 360px; padding: 16px; border-radius: 26px;
@@ -28,22 +29,20 @@
       button.primary { background: linear-gradient(180deg, #E35A3B, #B22F2A); border-color: transparent; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
       button:disabled { opacity: .45; cursor: default; }
       .count { margin-left: auto; color: rgba(235,235,245,.6); font-size: 12px; }
-    </style>
-    <div class="box" hidden></div>
-    <div class="panel">
-      <b>Block an element</b>
-      <div class="hint" id="hint">Click the ad or box you want to remove. Esc to cancel.</div>
-      <textarea id="sel" spellcheck="false" placeholder="CSS selector"></textarea>
-      <div class="row">
-        <button id="wider" disabled>Wider</button>
-        <button id="narrower" disabled>Narrower</button>
-        <span class="count" id="count"></span>
-      </div>
-      <div class="row">
-        <button class="primary" id="block" disabled>Block</button>
-        <button id="cancel">Cancel</button>
-      </div>
-    </div>`;
+    `;
+  const btn = (id, label, cls) => { const b = el("button", { id, textContent: label }); if (cls) b.className = cls; return b; };
+  shadow.append(
+    style,
+    el("div", { className: "box", hidden: true }),
+    el("div", { className: "panel" },
+      el("b", { textContent: "Block an element" }),
+      el("div", { className: "hint", id: "hint", textContent: "Click the ad or box you want to remove. Esc to cancel." }),
+      el("textarea", { id: "sel", spellcheck: false, placeholder: "CSS selector" }),
+      el("div", { className: "row" }, btn("wider", "Wider"), btn("narrower", "Narrower"), el("span", { className: "count", id: "count" })),
+      el("div", { className: "row" }, btn("block", "Block", "primary"), btn("cancel", "Cancel"))
+    )
+  );
+  ["wider", "narrower", "block"].forEach((id) => (shadow.getElementById(id).disabled = true));
   document.documentElement.appendChild(host);
   const $ = (id) => shadow.getElementById(id);
   const box = shadow.querySelector(".box");

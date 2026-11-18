@@ -50,3 +50,10 @@ html.sas-on ytm-companion-ad-renderer {
 .html5-video-player.ad-showing .ytp-skip-ad-button,
 .html5-video-player.ad-showing .ytp-ad-skip-button-container,
 .html5-video-player.ad-showing .ytp-ad-skip-button-slot { z-index: 41 !important; position: relative; }
+/* while the card covers an ad, also hide the ad's subtitles and advertiser boxes (Skip stays) */
+.html5-video-player.ad-showing .ytp-caption-window-container,
+.html5-video-player.ad-showing .ytp-ad-player-overlay-layout__player-card-container,
+.html5-video-player.ad-showing .ytp-ad-player-overlay-layout__ad-info-container,
+.html5-video-player.ad-showing .ytp-ad-visit-advertiser-button,
+.html5-video-player.ad-showing .ytp-ad-button,
+.html5-video-player.ad-showing .ytp-ad-hover-text-button { display: none !important; }

@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.7.0 (2026-11-18)
+
+### Fixed
+- **Plain black screen during YouTube ads.** YouTube blocks pages from inserting raw HTML (Trusted Types), so the OpenBlocker card failed to draw after the ad had already been hidden. The card is now built safely, and the ad is only hidden once the card is on screen.
+- **Element picker didn't open on YouTube**, for the same reason.
+
+### Changed
+- While the card covers an ad, the ad's subtitles and advertiser boxes are hidden too. YouTube's Skip button stays visible.
+
 ## v5.6.0 (2026-11-18)
 
 ### Fixed
