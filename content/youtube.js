@@ -5,22 +5,36 @@
 // and never seeks. Instead it:
 //   * clicks "Skip" as soon as it appears,
 //   * plays unskippable ads muted at 16x, so they are over in about a second,
-//   * restores the viewer's own volume, mute and speed afterwards,
-//   * hides ad slots on the page with CSS (youtube.css).
+//   * hides the ad picture while it plays (youtube.css),
+//   * restores the viewer's own volume, mute and speed afterwards.
+//
+// Robustness:
+//   * The ad is handled BEFORE any extension API call, and every extension API call is guarded,
+//     so the skipper keeps working even if the extension was updated while this tab stayed open
+//     (Chrome cuts such "orphaned" scripts off from the extension).
+//   * When OpenBlocker updates, the background re-injects this script into open YouTube tabs;
+//     the newest copy takes over and older copies stop.
+//   * Every video player on the page is checked, not just the first one found.
 (() => {
-  let enabled = true;
+  const ME = Math.random().toString(36).slice(2);
   const root = document.documentElement;
+  root.dataset.obYt = ME; // the newest copy of this script wins
+  const isCurrent = () => root.dataset.obYt === ME;
+
+  let enabled = true;
+  const safe = (fn) => { try { return fn(); } catch (_) { return undefined; } };
 
   function refresh() {
-    chrome.storage.local.get({ enabled: true, whitelist: [] }, (s) => {
+    safe(() => chrome.storage.local.get({ enabled: true, whitelist: [] }, (s) => {
+      if (chrome.runtime.lastError || !s) return;
       enabled = s.enabled && !s.whitelist.some((w) => location.hostname === w || location.hostname.endsWith("." + w));
       root.classList.toggle("sas-on", enabled);
-      try { if (enabled) localStorage.removeItem("__sas_off"); else localStorage.setItem("__sas_off", "1"); } catch (_) {}
-      if (!enabled) endAd();
-    });
+      safe(() => { if (enabled) localStorage.removeItem("__sas_off"); else localStorage.setItem("__sas_off", "1"); });
+      if (!enabled) endAll();
+    }));
   }
   refresh();
-  chrome.storage.onChanged.addListener((c) => { if (c.enabled || c.whitelist) refresh(); });
+  safe(() => chrome.storage.onChanged.addListener((c) => { if (c.enabled || c.whitelist) refresh(); }));
 
   const SKIP_SELECTORS = [
     ".ytp-skip-ad-button",
@@ -32,46 +46,45 @@
     ".ytp-ad-overlay-close-button",
   ];
 
-  // State saved when an ad starts, restored when it ends
-  let adVideo = null;
-  let saved = null;
+  // video element -> the viewer's settings saved when its ad started
+  const saved = new Map();
 
   function startAd(video) {
-    if (adVideo !== video) {
-      if (adVideo) endAd();
-      adVideo = video;
-      saved = { muted: video.muted, rate: video.playbackRate };
-      chrome.runtime.sendMessage({ type: "adSkipped", count: 1 }).catch(() => {});
+    if (!saved.has(video)) {
+      saved.set(video, { muted: video.muted, rate: video.playbackRate === 16 ? 1 : video.playbackRate });
+      safe(() => chrome.runtime.sendMessage({ type: "adSkipped", count: 1 }).catch(() => {}));
     }
     if (!video.muted) video.muted = true;
-    if (video.playbackRate !== 16) { try { video.playbackRate = 16; } catch (_) {} }
+    if (video.playbackRate !== 16) safe(() => { video.playbackRate = 16; });
   }
 
-  function endAd() {
-    if (!adVideo || !saved) { adVideo = null; saved = null; return; }
-    try {
-      adVideo.playbackRate = saved.rate && saved.rate !== 16 ? saved.rate : 1;
-      adVideo.muted = saved.muted;
-    } catch (_) {}
-    adVideo = null;
-    saved = null;
+  function endAd(video) {
+    const s = saved.get(video);
+    if (!s) return;
+    saved.delete(video);
+    safe(() => { video.playbackRate = s.rate || 1; video.muted = s.muted; });
   }
+  function endAll() { [...saved.keys()].forEach(endAd); }
 
   function handle() {
+    if (!isCurrent()) { stop(); return; }
     if (!enabled) return;
-    const player = document.querySelector("#movie_player, .html5-video-player");
-    if (!player) return;
-    const video = player.querySelector("video");
-    const inAd = player.classList.contains("ad-showing") || player.classList.contains("ad-interrupting");
-
-    if (inAd) {
-      for (const sel of SKIP_SELECTORS) {
-        document.querySelectorAll(sel).forEach((btn) => { if (btn.offsetParent !== null) btn.click(); });
+    const players = document.querySelectorAll("#movie_player, .html5-video-player");
+    let anyAd = false;
+    for (const player of players) {
+      const video = player.querySelector("video");
+      const inAd = player.classList.contains("ad-showing") || player.classList.contains("ad-interrupting");
+      if (inAd) {
+        anyAd = true;
+        if (video) startAd(video);
+        for (const sel of SKIP_SELECTORS) {
+          player.querySelectorAll(sel).forEach((btn) => { if (btn.offsetParent !== null) btn.click(); });
+        }
+      } else if (video && saved.has(video)) {
+        endAd(video);
       }
-      if (video) startAd(video);
-    } else if (adVideo) {
-      endAd();
     }
+    if (!anyAd) for (const v of [...saved.keys()]) if (!v.isConnected) saved.delete(v);
 
     // Close the "ad blockers are not allowed" dialog if it appears, and resume playback
     const wall = document.querySelector("ytd-enforcement-message-view-model");
@@ -79,16 +92,20 @@
       const dialog = wall.closest("tp-yt-paper-dialog") || wall;
       dialog.remove();
       document.querySelectorAll("tp-yt-iron-overlay-backdrop").forEach((b) => b.remove());
-      if (video && video.paused) video.play().catch(() => {});
+      const v = document.querySelector("#movie_player video");
+      if (v && v.paused) v.play().catch(() => {});
     }
   }
 
-  // If the viewer changes the speed themselves while no ad is playing, nothing is touched.
-  // If an ad ends while the tab is in the background, the next check restores the settings.
+  let mo = null, timer = null;
+  function stop() {
+    if (mo) mo.disconnect();
+    clearInterval(timer);
+  }
   function start() {
-    const mo = new MutationObserver(handle);
+    mo = new MutationObserver(handle);
     mo.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
-    setInterval(handle, 250);
+    timer = setInterval(handle, 200);
     handle();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);

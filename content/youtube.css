@@ -28,3 +28,8 @@ html.sas-on ad-slot-renderer,
 html.sas-on ytm-companion-ad-renderer {
   display: none !important;
 }
+
+/* While an ad plays (muted, 16x), hide its picture so it doesn't flash on screen */
+html.sas-on .html5-video-player.ad-showing video {
+  opacity: 0 !important;
+}

@@ -584,7 +584,21 @@ if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
 }
 
 // ---------------- Lifecycle ----------------
+// After an install or update, YouTube tabs that were already open still hold the old
+// (now disconnected) content script. Inject the current one so ad skipping works without a reload.
+async function reinjectYouTube() {
+  try {
+    const tabs = await chrome.tabs.query({ url: ["*://*.youtube.com/*", "*://*.youtube-nocookie.com/*"] });
+    for (const t of tabs) {
+      const target = { tabId: t.id, allFrames: true };
+      chrome.scripting.insertCSS({ target, files: ["content/youtube.css"] }).catch(() => {});
+      chrome.scripting.executeScript({ target, files: ["content/youtube.js"] }).catch(() => {});
+    }
+  } catch (_) {}
+}
+
 chrome.runtime.onInstalled.addListener(async () => {
+  reinjectYouTube();
   const s = await chrome.storage.local.get({ enabled: true, whitelist: [], blockedTotal: 0, trackingParams: true, userFilters: "" });
   await chrome.storage.local.set(s);
   const existing = await chrome.declarativeNetRequest.getDynamicRules();
