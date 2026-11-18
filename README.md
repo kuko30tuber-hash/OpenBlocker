@@ -52,13 +52,13 @@
 
 OpenBlocker isn't on the Chrome Web Store, so you load it as an unpacked extension:
 
-1. Download or clone this repository.
+1. **[Download the latest version (zip)](https://github.com/kuko30tuber-hash/OpenBlocker/archive/refs/heads/main.zip)** and unzip it, or clone this repository.
 2. Open `chrome://extensions` and turn on **Developer mode** (top right).
 3. Click **Load unpacked** and select the repository folder (the one containing `manifest.json`).
 4. **Recommended:** click **Details** on OpenBlocker and turn on **Allow User Scripts**. This lets page fixes run before a site's own code, even on the first visit. *Settings → Protection* shows whether it's on.
 5. Wait about a minute for the filter lists to download. The popup shows their status.
 
-To update, replace the files and click the reload ↻ icon on the extension's card.
+To update, download the latest zip again, replace the files, and click the reload ↻ icon on the extension's card. If you cloned the repository, run `git pull` instead. See [CHANGELOG.md](CHANGELOG.md) for what changed in each version.
 
 ## Project structure
 
