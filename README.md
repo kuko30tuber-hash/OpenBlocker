@@ -18,7 +18,7 @@
 ## Features
 
 **Blocking**
-- **15 filter lists on by default:** EasyList, EasyPrivacy, uBlock filters (Ads, Quick fixes, Unbreak, Privacy, Badware), AdGuard (Base, Mobile, Tracking Protection, URL Tracking), HaGeZi Pro, Peter Lowe's list, d3Host and StevenBlack hosts. Six optional annoyance lists (cookie banners, newsletter pop-ups, social widgets) and HaGeZi Ultimate can be turned on in Settings. All lists update daily.
+- **14 filter lists on by default:** EasyList, EasyPrivacy, uBlock filters (Ads, Quick fixes, Unbreak, Privacy, Badware), AdGuard (Base, Mobile, Tracking Protection, URL Tracking), Peter Lowe's list, d3Host and StevenBlack hosts. Six optional annoyance lists (cookie banners, newsletter pop-ups, social widgets) can be turned on in Settings. All lists update daily.
 - **Packs over 150,000 blocked domains** into Chrome's 30,000-rule limit by grouping 1,000 domains per rule.
 - **Full filter syntax:** domain, path and regex rules, `$third-party`, `$domain=`, `$important`, exceptions, `$document`, `$redirect`, `$removeparam`, `$csp`, and entity domains like `google.*`.
 
@@ -34,10 +34,10 @@
 - **Pop-up and pop-under blocker.**
 
 **YouTube**
-- The Skip button is clicked the moment YouTube shows it.
-- Unskippable ads are muted and covered by an OpenBlocker card counting down to your video.
+- Ad data is removed from YouTube's player responses, so most ads never get scheduled.
+- As a backup, Skip is clicked automatically and unskippable ads are muted and fast-forwarded.
 - Ad slots in the feed and sidebar are hidden.
-- OpenBlocker never speeds up, skips ahead in or edits YouTube ads, because YouTube answers all of those with a black player.
+- Tip for Vivaldi users: turn off Vivaldi's built-in *Tracker and Ad Blocking* for YouTube, because running it alongside OpenBlocker causes black screens.
 
 **Interface**
 - Popup with per-page and total counters, and a one-click pause per site.
@@ -103,7 +103,6 @@ OpenBlocker downloads filter lists from their maintainers at runtime. None of th
 [EasyList / EasyPrivacy](https://easylist.to),
 [uBlock Origin filters](https://github.com/uBlockOrigin/uAssets),
 [AdGuard filters](https://github.com/AdguardTeam/AdguardFilters),
-[HaGeZi DNS blocklists](https://github.com/hagezi/dns-blocklists),
 [Peter Lowe's list](https://pgl.yoyo.org/adservers/),
 [StevenBlack hosts](https://github.com/StevenBlack/hosts) and
 [d3Host](https://github.com/d3ward/toolz).

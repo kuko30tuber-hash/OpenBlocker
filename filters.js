@@ -372,7 +372,7 @@ function sasParseNetwork(line, out) {
       if (!dm && !cond.initiatorDomains) return;
       const c = { resourceTypes: ["main_frame", "sub_frame"] };
       if (dm) c.requestDomains = [dm[1].toLowerCase()]; else c.requestDomains = cond.initiatorDomains;
-      out.allowRules.push({ priority: 5, action: { type: "allowAllRequests" }, condition: c }); // beats built-in tracker blocks (3) and stand-ins (4)
+      out.allowRules.push({ priority: 2, action: { type: "allowAllRequests" }, condition: c });
       return;
     }
     if (types.length || notTypes.length) types.push("main_frame"); // e.g. $doc,script

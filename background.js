@@ -37,8 +37,6 @@ const FILTER_LISTS = [
       "https://cdn.jsdelivr.net/gh/d3ward/toolz@master/src/d3host.txt",
     ],
   },
-  { id: "hagezi-pro", name: "HaGeZi Pro", desc: "A large, carefully maintained list of ad, tracking and telemetry domains.", group: "Domains", on: true, urls: ["https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt", "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt"] },
-  { id: "hagezi-ultimate", name: "HaGeZi Ultimate (aggressive)", desc: "Blocks even more trackers. Can occasionally break a site's sign-in or video player.", group: "Domains", on: false, urls: ["https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/ultimate.txt", "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt"] },
   { id: "stevenblack", name: "StevenBlack hosts", desc: "A large hosts list of ad, tracking and malware domains.", group: "Domains", on: true, urls: ["https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"] },
   // Optional (off by default)
   { id: "cookies", name: "EasyList Cookie notices", desc: "Hides cookie-consent banners.", group: "Annoyances", on: false, urls: ["https://secure.fanboy.co.nz/fanboy-cookiemonster.txt", "https://easylist-downloads.adblockplus.org/easylist-cookie.txt"] },
@@ -275,19 +273,6 @@ function collect(maps, key, host) {
   return out;
 }
 
-// ---------------- YouTube safety ----------------
-// The current YouTube fixes in uBlock's lists depend on request-rewriting scriptlets OpenBlocker
-// doesn't implement. Running only the response-editing half makes YouTube's player stay black,
-// so on YouTube only scriptlets that don't touch video/ad data are allowed. Ads there are handled
-// by content/youtube.js (auto-skip, muted 16x) and youtube.css.
-const YT_DOMAINS = ["youtube.com", "youtube-nocookie.com", "youtubekids.com", "youtu.be"];
-const YT_SAFE_SCRIPTLETS = new Set(["no-window-open-if", "remove-attr", "remove-class", "set-attr", "addEventListener-defuser", "nofab", "nobab", "window.name-defuser"]);
-const isYouTubeHost = (host) => hostSuffixes(host).some((h) => YT_DOMAINS.includes(h));
-function ytFilter(host, list) {
-  if (!isYouTubeHost(host)) return list;
-  return list.filter((item) => YT_SAFE_SCRIPTLETS.has(Array.isArray(item) ? item[0] : JSON.parse(item)[0]));
-}
-
 async function pageData(host) {
   const sources = [await getCosmetic(), await getUserCosmetic()];
   const except = new Set(collect(sources, "exceptions", host));
@@ -303,7 +288,7 @@ async function pageData(host) {
 
   const procedural = [...new Set(collect(sources, "procedural", host).filter((s) => !except.has(s)))];
   const scriptlets = allScriptletsOff ? [] :
-    ytFilter(host, [...new Set(collect(sources, "scriptlets", host))].filter((k) => !sExcept.has(k)).map((k) => JSON.parse(k)));
+    [...new Set(collect(sources, "scriptlets", host))].filter((k) => !sExcept.has(k)).map((k) => JSON.parse(k));
   return { css, procedural, scriptlets };
 }
 
@@ -347,12 +332,7 @@ async function buildUserScripts(whitelist) {
     const map = new Map();          // domain -> Set(json)
     const exc = {};                 // domain -> [json | "*"]
     for (const c of sources) {
-      for (const [d, arr] of Object.entries(c.scriptlets)) {
-        const safe = ytFilter(d, arr);
-        if (!safe.length) continue;
-        if (!map.has(d)) map.set(d, new Set());
-        safe.forEach((k) => map.get(d).add(k));
-      }
+      for (const [d, arr] of Object.entries(c.scriptlets)) { if (!map.has(d)) map.set(d, new Set()); arr.forEach((k) => map.get(d).add(k)); }
       for (const [d, arr] of Object.entries(c.scriptletExceptions)) exc[d] = [...new Set([...(exc[d] || []), ...arr])];
     }
     const domains = [...map.keys()].filter((d) => /^[a-z0-9.-]+$/.test(d)).sort();
@@ -584,21 +564,7 @@ if (chrome.declarativeNetRequest.onRuleMatchedDebug) {
 }
 
 // ---------------- Lifecycle ----------------
-// After an install or update, YouTube tabs that were already open still hold the old
-// (now disconnected) content script. Inject the current one so ad skipping works without a reload.
-async function reinjectYouTube() {
-  try {
-    const tabs = await chrome.tabs.query({ url: ["*://*.youtube.com/*", "*://*.youtube-nocookie.com/*"] });
-    for (const t of tabs) {
-      const target = { tabId: t.id, allFrames: true };
-      chrome.scripting.insertCSS({ target, files: ["content/youtube.css"] }).catch(() => {});
-      chrome.scripting.executeScript({ target, files: ["content/youtube.js"] }).catch(() => {});
-    }
-  } catch (_) {}
-}
-
 chrome.runtime.onInstalled.addListener(async () => {
-  reinjectYouTube();
   const s = await chrome.storage.local.get({ enabled: true, whitelist: [], blockedTotal: 0, trackingParams: true, userFilters: "" });
   await chrome.storage.local.set(s);
   const existing = await chrome.declarativeNetRequest.getDynamicRules();

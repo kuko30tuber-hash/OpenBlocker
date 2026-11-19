@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OpenBlocker",
-  "version": "5.7.0",
+  "version": "5.8.0",
   "description": "Free, open ad blocker with uBlock/AdGuard-level filtering, anti-adblock defusing, tracking-link cleaning and scam-site protection.",
   "minimum_chrome_version": "111",
   "permissions": [
@@ -79,6 +79,18 @@
         "*://*.youtube-nocookie.com/*"
       ],
       "js": [
+        "content/yt-main.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "js": [
         "content/youtube.js"
       ],
       "css": [
@@ -112,15 +124,6 @@
       ],
       "matches": [
         "<all_urls>"
-      ]
-    },
-    {
-      "resources": [
-        "icons/logo256.png"
-      ],
-      "matches": [
-        "*://*.youtube.com/*",
-        "*://*.youtube-nocookie.com/*"
       ]
     }
   ]

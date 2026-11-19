@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.8.0 (2026-11-19)
+
+### Changed
+- **Blocking engine restored to v5.0.** Everything that blocks ads (filter lists, rules, page fixes, YouTube handling) is back to how it was in v5.0. The changes from v5.1 to v5.7 are reverted, including the HaGeZi lists and the later YouTube changes.
+- The current interface, logo and OpenBlocker name are kept: the Liquid Glass popup and settings in the sunset colors, the element picker, the warning page and the icons.
+
+### Note
+- In Vivaldi, turn off Vivaldi's built-in Tracker and Ad Blocking for YouTube. Running two blockers on YouTube causes a black player.
+
 ## v5.7.0 (2026-11-18)
 
 ### Fixed

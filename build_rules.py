@@ -76,7 +76,7 @@ mixpanel.com segment.io segment.com cdn.segment.com amplitude.com heapanalytics.
 kissmetrics.com kissmetrics.io statcounter.com histats.com clicky.com getclicky.com
 woopra.com mxpnl.com
 branch.io app.link adjust.com adjust.io appsflyer.com kochava.com
-widgets.pinterest.com grs.hicloud.com adtimaserver.vn adtima.vn adsdk.yandex.ru adsdk.yandex.net yandexadexchange.net
+widgets.pinterest.com adsdk.yandex.ru adsdk.yandex.net yandexadexchange.net
 appmetrica.yandex.com mobile.yandexadexchange.net adfstat.yandex.com
 advertising-api-eu.amazon.com affiliationjs.s3.amazonaws.com fls-na.amazon.com
 device-metrics-us.amazon.com device-metrics-us-2.amazon.com mads-eu.amazon.com
@@ -91,6 +91,13 @@ yieldoptimizer.com adhigh.net adsco.re ad.gt adlightning.com confiant-integratio
 
 # Ad-related URL patterns (urlFilter syntax)
 URL_PATTERNS = [
+    "||youtube.com/pagead/",
+    "||youtube.com/ptracking",
+    "||youtube.com/api/stats/ads",
+    "||youtube.com/api/stats/qoe?*adformat",
+    "||youtube.com/get_midroll_",
+    "||youtube.com/pcs/activeview",
+    "||youtube.com/youtubei/v1/log_event?*adunit",
     "||connect.facebook.net^*/fbevents.js",
     "||facebook.com/tr/",
     "||facebook.com/tr?",
@@ -150,27 +157,16 @@ URL_PATTERNS = [
     "/banners/ads_",
     "/banners/ad_",
     "/ads/ads.js",
-    "/pagead.js",
-    "/widget/ads.",
-    "/js/ads.js",
     "/ads/banner.",
 ]
 
-# Pure tracking/telemetry hosts: blocked with high priority so exceptions in downloaded lists can't
-# unblock them. Google/Facebook ad & analytics hosts stay normal priority so the stand-in scripts
-# (redirects below) and site-specific exceptions keep pages working.
-SOFT = ("google", "doubleclick", "googletag", "googlesyndication", "googleadservices", "gstatic",
-        "facebook", "amazon-adsystem", "imasdk", "app-measurement")
 rules = []
 rid = 1
-uniq = sorted(set(d.lower() for d in DOMAINS))
-hard = [d for d in uniq if not any(k in d for k in SOFT)]
-soft = [d for d in uniq if any(k in d for k in SOFT)]
-for prio, group in ((3, hard), (1, soft)):
-    for i in range(0, len(group), 500):
-        rules.append({"id": rid, "priority": prio, "action": {"type": "block"},
-                      "condition": {"requestDomains": group[i:i + 500]}})
-        rid += 1
+for i in range(0, len(DOMAINS), 500):
+    chunk = sorted(set(d.lower() for d in DOMAINS[i:i + 500]))
+    rules.append({"id": rid, "priority": 1, "action": {"type": "block"},
+                  "condition": {"requestDomains": chunk}})
+    rid += 1
 
 for p in URL_PATTERNS:
     rules.append({"id": rid, "priority": 1, "action": {"type": "block"},
@@ -189,7 +185,7 @@ REDIRECTS = [
     ("||sb.scorecardresearch.com/beacon.js", "scorecard.js"),
 ]
 for flt, res in REDIRECTS:
-    rules.append({"id": rid, "priority": 4,
+    rules.append({"id": rid, "priority": 2,
                   "action": {"type": "redirect", "redirect": {"extensionPath": "/resources/" + res}},
                   "condition": {"urlFilter": flt, "resourceTypes": ["script"]}})
     rid += 1
